@@ -77,7 +77,8 @@ def link_editor(links) -> None:
 #TODO: move this comment into javadocs esque comment
 # DL clips as %(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s to Clips folder
 def download_links(links) -> None:
-    output_format = 'Clips/%(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s'
+    # Should clips output to their own dir or to the root dir?
+    output_format = '../%(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s'
     timeout = 600 # in seconds
     
     ydl_opts = {
