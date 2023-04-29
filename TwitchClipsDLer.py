@@ -1,17 +1,14 @@
-'''
-    Script to make dl'ing twitch clips easier
-    Was written specifically to make dl'ing clips that I've made easier,
-    but idk why it wouldn't work for clips in general tho.
-'''
 import yt_dlp
 from time import sleep
 from os import system, name
 
+#TODO: move to separate utilities script
 def ClearScreen():
     if name == 'nt':
         _ = system('cls')
     else:
         _ = system('clear')
+
 
 def DisplayLinks(links):
     ClearScreen()
