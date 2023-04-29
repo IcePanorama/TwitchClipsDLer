@@ -1,4 +1,4 @@
-# "A quickly hacked together tool meant to make downloading many Twitch clips at once easier."
+# TwitchClipsDLer
 # Copyright (C) 2023  IcePanorama
 #
 # This program is free software: you can redistribute it and/or modify
