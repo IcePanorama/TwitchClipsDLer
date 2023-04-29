@@ -10,7 +10,9 @@ Installing the program is as simple as cloning the directory.
 
 After cloning, you can run the program using the provided `Run.bat` file.
 
-For non-Windows users, run the script by opening a terminal/command line in the `src/` directory and typing: `python TwitchClipsDLer.py`.
+For non-Windows users, run the script by opening a terminal/command line in the `src/` directory and typing:
+
+```python TwitchClipsDLer.py```
 
 ### What's needed to make this script work
 
