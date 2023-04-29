@@ -1,6 +1,6 @@
 # TwitchClipsDLer
 
-A quickly hacked together tool which uses yt_dlpt to make downloading multiple Twitch clips at once easier.
+A quickly hacked together tool which uses yt_dlp to make downloading multiple Twitch clips at once easier.
 
 I originally made this script in an hour or two back on July 16th, 2022. I'm a bit of a data hoarder and so this script helps me archive twitch clips that I've made. I've been meaning to clean it up for some time now and I'm hoping to learn how to use git in the process.
 
