@@ -14,11 +14,11 @@ For non-Windows users, run the script by opening a terminal/command line in the 
 
 ```python TwitchClipsDLer.py```
 
-### What's needed to make this script work
+## Program Requirements
 
 This script uses `yt_dlp` to download these twitch clips. Install it using pip and the script should work fine.
 
-### Using the script
+## Usage
 
 The script uses an incredibly simple CLI. Just follow the instructions on screen and you should be good.
 
