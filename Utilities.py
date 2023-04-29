@@ -16,7 +16,7 @@
 
 from os import system, name
 
-def ClearScreen():
+def clear_screen():
     if name == 'nt':
         _ = system('cls')
     else:

@@ -16,13 +16,14 @@
 
 import yt_dlp
 from time import sleep
-from Utilities import ClearScreen
+from Utilities import clear_screen
 
 
-def DisplayLinks(links):
-    ClearScreen()
+def display_links(links) -> None:
+    clear_screen()
     print("Links:")
 
+#TODO: might be able to replace this with an enum
     x = 0
     while x < len(links):
         item = x + 1
@@ -31,98 +32,108 @@ def DisplayLinks(links):
 
     print("\n")
 
-def EditLinks(links):
+
+def link_editor(links) -> None:
     entry = ""
     while True:
-        DisplayLinks(links)
+        display_links(links)
         entry = input("Enter the # of the entry you'd like to edit or type [X] to continue: ")
 
-        # check that entry exists
+#TODO: handle input not being of type int
         if entry.upper() == "X":
             break
-        else:
-            # if entry != a number, throw err
-            try:
-                if int(entry) - 1 >= 0 and int(entry) - 1 < len(links):
-                    while True:
-                        userInput = input("\n[E]dit or [D]elete or [C]ancel?\n> ")
-                    
-                        # edit entry
-                        if userInput.upper() == "E":
-                           links[int(entry) - 1] = input("Enter replacement link for #" + entry + ": ")
-                           break
-                        # delete entry
-                        elif userInput.upper() == "D":
-                            links.pop(int(entry) - 1)
-                            break
-                        # skip entry
-                        elif userInput.upper() != "C":
-                            print("Invalid Input")
-                            sleep(1)
-                            ClearScreen()
-                            DisplayLinks(links)
-                        else:
-                            break
-                else:
-                    print("Invalid Input")
-                    sleep(1)
-            except:    
-                print("Invalid Input")
-                sleep(1)
+        #should int(entry) be its own var?
+        elif int(entry) - 1 < 0 or int(entry) - 1 >= len(links):
+            print("Invalid Input")
+            sleep(1)
+            continue
+
+        try:
+            while True:
+                user_input = input("\n[E]dit or [D]elete or [C]ancel?\n> ")
+            
+                match user_input.upper():
+                    case "E":
+                        links[int(entry) - 1] = input("Enter replacement link for #" + entry + ": ")
+                        break
+                    case "D":
+                        links.pop(int(entry) - 1)
+                        break
+                    case "C":
+                        break
+                    case _:
+                        print("Invalid Input")
+                        sleep(1)
+                        clear_screen()
+                        display_links(links)           
+
+        except:    
+            print("Invalid Input")
+            sleep(1)
 
     return links
 
-def DownloadLinks(links):
-    outputFormat = 'Clips\%(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s'
-    timeout = 600 # wait 10 mins w/o internet before giving up
+
+#TODO: move this comment into javadocs esque comment
+# DL clips as %(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s to Clips folder
+def download_links(links) -> None:
+    output_format = 'Clips/%(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s'
+    timeout = 600 # in seconds
     
     ydl_opts = {
-        'outtmpl': outputFormat,
+        'outtmpl': output_format,
         'socket_timeout': timeout
     }
 
     x = 0
     while x < len(links):
-        ClearScreen()
+        clear_screen()
         print("Downloading clip #" + str(x + 1))
         
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([links[x]])
         except:
+#FIXME: currently the program skips clips when errors occur. should this be handled in a better way?
             print("Download error, skipping")
             sleep(1)
         x += 1
 
-if __name__ == "__main__":
-    ClearScreen()
-    #Main()
 
-    links = [];
+def get_links() -> list:
+    links = []
+    last_response = ""
 
-    # Prompt user for to either enter a twitch link or X to quit
-    lastResponse = "";
-    while lastResponse.upper() != "X":
-        lastResponse = input("Enter clip link or [X] to continue: ")
+    while last_response.upper() != "X":
+        last_response = input("Enter clip link or [X] to continue: ")
        
         # Prevents blank entries/entries that start with blanks
         try:
-            if lastResponse[0] != "" and lastResponse[0] != " " and lastResponse.upper() != "X":
-                links.append(lastResponse)
+            if last_response[0] != "" and last_response[0] != " " and last_response.upper() != "X":
+                links.append(last_response)
         except:
             pass
 
         if len(links) > 0:
-            DisplayLinks(links)
+            display_links(links)
+    
+    return links
+
+
+def edit_links(links) -> None:
+    display_links(links)
+
+    user_input = input("[E]dit links or [Press Any Key to Continue]\n> ")
+    if user_input.upper() == "E":
+        links = link_editor(links)  
+
+
+if __name__ == "__main__":
+    clear_screen()
+
+    links = get_links()
 
     if len(links) > 0:
-        # Display list of clip links
-        DisplayLinks(links)
+        edit_links(links)
 
-        # prompt user to say they're correct or to enter the link # to replace it
-        userInput = input("[E]dit links or [Press Any Key to Continue]\n> ")
-        if userInput.upper() == "E":
-            links = EditLinks(links)  
-
-        # DL clips as %(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s to Clips folder
-        DownloadLinks(links)
+        download_links(links)
