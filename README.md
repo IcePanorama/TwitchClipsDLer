@@ -6,11 +6,11 @@ I originally made this script in an hour or two back on July 16th, 2022. I'm a b
 
 ## Installing and running
 
-Clone the directory and run the given python file with the following command:
+Installing the program is as simple as cloning the directory.
 
-```plaintext
-python TwitchClipsDLer.py
-```
+After cloning, you can run the program using the provided `Run.bat` file.
+
+For non-Windows users, run the script by opening a terminal/command line in the `src/` directory and typing: `python TwitchClipsDLer.py`.
 
 ### What's needed to make this script work
 
