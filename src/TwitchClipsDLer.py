@@ -34,6 +34,11 @@ def display_links(links) -> None:
 
 
 def link_editor(links) -> None:
+    '''
+    Gives user the ability to change or remove links from the download queue before downloading begins
+
+    :param links: list of twitch clip links
+    '''
     entry = ""
     while True:
         display_links(links)
@@ -42,7 +47,7 @@ def link_editor(links) -> None:
 #TODO: handle input not being of type int
         if entry.upper() == "X":
             break
-        #should int(entry) be its own var?
+        #should int(entry) - 1 be its own var?
         elif int(entry) - 1 < 0 or int(entry) - 1 >= len(links):
             print("Invalid Input")
             sleep(1)
@@ -74,9 +79,12 @@ def link_editor(links) -> None:
     return links
 
 
-#TODO: move this comment into javadocs esque comment
-# DL clips as %(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s to Clips folder
 def download_links(links) -> None:
+    '''
+    Downloads every clip and outputs them using the format %(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s
+
+    :param links: list of twitch clip links
+    '''
     # Should clips output to their own dir or to the root dir?
     output_format = '../%(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s'
     timeout = 600 # in seconds
@@ -121,6 +129,7 @@ def get_links() -> list:
     return links
 
 
+# Should this be renamed to something better?
 def edit_links(links) -> None:
     display_links(links)
 
