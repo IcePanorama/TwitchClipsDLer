@@ -14,17 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import yt_dlp
 from time import sleep
-from os import system, name
-
-#TODO: move to separate utilities script
-def ClearScreen():
-    if name == 'nt':
-        _ = system('cls')
-    else:
-        _ = system('clear')
+from Utilities import ClearScreen
 
 
 def DisplayLinks(links):
@@ -102,7 +94,10 @@ def DownloadLinks(links):
             sleep(1)
         x += 1
 
-def Main():
+if __name__ == "__main__":
+    ClearScreen()
+    #Main()
+
     links = [];
 
     # Prompt user for to either enter a twitch link or X to quit
@@ -131,7 +126,3 @@ def Main():
 
         # DL clips as %(upload_date)s-%(timestamp)s-%(creator)s-%(title)s.%(ext)s to Clips folder
         DownloadLinks(links)
-
-if __name__ == "__main__":
-    ClearScreen()
-    Main()
