@@ -8,7 +8,7 @@ I originally made this script in an hour or two back on July 16th, 2022. I'm a b
 
 Installing the program is as simple as cloning the directory.
 
-After cloning, you can run the program using the provided `Run.bat` file if you're on Windows or by using the provided 'Run.sh' script if you're on Linux.
+After cloning, you can run the program using the provided `Run.bat` file if you're on Windows or by using the provided `Run.sh` script if you're on Linux.
 
 For some linux users, it may be necessary to run `chmod +x Run.sh` first in order for Run.sh script to be executable.
 
