@@ -34,7 +34,6 @@ This code was hacked together many months ago at this point. I only needed it to
 
 ## To Do
 
-* Create bash script for linux users
 * Might make the script read links from a file to make downloading clips in bulk easier.
 * Might make the script read links in the form of command line arguments to make downloading one or two clips a bit simpler.
 
